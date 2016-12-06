@@ -1,0 +1,26 @@
+name:                stlc-unbound
+version:             0.1.0.0
+synopsis:            Testing the STLC model of Binders Unbound
+description:         Please see README.md
+homepage:            https://github.com/GuglielmoS/pbtonplmt/stlc-unbound
+license:             BSD3
+license-file:        LICENSE
+author:              Guglielmo Fachini
+maintainer:          guglielmo@fachini.net
+copyright:           2016 Guglielmo Fachini
+category:            PLT
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable stlc-unbound
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  other-modules:       STLC
+                     , Properties
+                     , TestFeat
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                     , containers >= 0.5.6.2
+                     , mtl >= 0.2.1
+                     , unbound >= 0.5.1
+                     , testing-feat >= 0.4.0.3
