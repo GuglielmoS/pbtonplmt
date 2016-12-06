@@ -1,0 +1,9 @@
+resolver: lts-6.1
+packages:
+- '.'
+extra-deps:
+- unbound-0.5.1
+- RepLib-0.5.4
+- lazysmallcheck-0.6
+flags: {}
+extra-package-dbs: []

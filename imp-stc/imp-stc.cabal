@@ -1,0 +1,89 @@
+name:                imp-stc
+version:             0.1.0.0
+synopsis:            Implementation of IMP with a secure type checker
+description:         Please see README.md
+homepage:            https://github.com/GuglielmoS/pbtonplmt/imp-stc
+license:             BSD3
+license-file:        LICENSE
+author:              Guglielmo Fachini
+maintainer:          guglielmo@fachini.net
+copyright:           2016 Guglielmo Fachini
+category:            PLT
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     IMP, Sec, Properties, Correct, Bug1, Bug2
+  default-language:    Haskell2010
+  ghc-options:         -Wall -O2
+  build-depends:       base >= 4.7 && < 5
+                     , containers >= 0.5.6.2
+                     , mtl >= 0.2.1
+                     , unbound >= 0.5.1
+                     , smallcheck >= 1.1.1
+
+executable imp-stc-feat-auto
+  hs-source-dirs:      app-feat-auto
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  ghc-options:         -Wall -O2
+  build-depends:       base >= 4.7 && < 5
+                     , imp-stc 
+                     , containers >= 0.5.6.2
+                     , mtl >= 0.2.1
+                     , unbound >= 0.5.1
+                     , testing-feat >= 0.4.0.3
+                     , clock >= 0.7.2
+                     
+executable imp-stc-smallcheck-auto
+  hs-source-dirs:      app-smallcheck-auto
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  ghc-options:         -Wall -O2
+  build-depends:       base >= 4.7 && < 5
+                     , imp-stc
+                     , containers >= 0.5.6.2
+                     , mtl >= 0.2.1
+                     , unbound >= 0.5.1
+                     , smallcheck >= 1.1.1
+                     , clock >= 0.7.2
+
+executable imp-stc-smallcheck-hw
+  hs-source-dirs:      app-smallcheck-hw
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  ghc-options:         -Wall -O2
+  build-depends:       base >= 4.7 && < 5
+                     , imp-stc 
+                     , containers >= 0.5.6.2
+                     , mtl >= 0.2.1
+                     , unbound >= 0.5.1
+                     , smallcheck >= 1.1.1
+                     , clock >= 0.7.2
+
+executable imp-stc--lazysmallcheck-hw
+  hs-source-dirs:      app-lazysmallcheck-hw
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  ghc-options:         -Wall -O2
+  build-depends:       base >= 4.7 && < 5
+                     , imp-stc 
+                     , containers >= 0.5.6.2
+                     , mtl >= 0.2.1
+                     , unbound >= 0.5.1
+                     , lazysmallcheck >= 0.6
+                     , clock >= 0.7.2
+
+test-suite imp-stc-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  default-language:    Haskell2010
+  main-is:             Spec.hs
+  other-modules:       SanityCheckSpec
+  build-depends:       base >= 4.7 && < 5
+                     , imp-stc
+                     , containers >= 0.5.6.2
+                     , mtl >= 0.2.1
+                     , unbound >= 0.5.1
+                     , hspec
