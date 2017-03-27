@@ -126,8 +126,7 @@ red (Lam bnd) =
     case e of
      -- look for an eta-reduction
      App e1 t (Var y) | y == x && x `S.notMember` fv e1 -> return e1
-     --otherwise -> return e
-     otherwise -> return (Lam (bind x e'))
+     otherwise -> return e
 red e = return $ e
 
 -- Reduce both sides until you find a match.
