@@ -78,13 +78,15 @@ eval1 (TmSucc t)   | isval t   = return Nothing
 eval1 (TmPred TmZero)          = return $ Just TmZero
 eval1 (TmPred (TmSucc t)) 
     | isnumericval t           = return $ Just t
-eval1 (TmPred t) = eval1Cons TmPred t
+eval1 (TmPred t)   | isval t   = return Nothing
+                   | otherwise = eval1Cons TmPred t
 eval1 (TmIsZero TmZero)        = return $ Just TmTrue
 eval1 (TmIsZero t) | isval t   = return $ Just TmFalse
                    | otherwise = eval1Cons TmIsZero t
 eval1 (TmIf TmTrue  c a)       = return $ Just c
 eval1 (TmIf TmFalse c a)       = return $ Just a
-eval1 (TmIf p c a) = eval1Cons (\p' -> TmIf p' c a) p
+eval1 (TmIf p c a) | isval p   = return Nothing 
+                   | otherwise = eval1Cons (\p' -> TmIf p' c a) p
 eval1 (TmTimesFloat (TmFloat f1) (TmFloat f2))
                      = return $ Just $ TmFloat $ f1 * f2
 eval1 (TmTimesFloat t1@(TmFloat _) t2) 

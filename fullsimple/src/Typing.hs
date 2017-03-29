@@ -67,18 +67,7 @@ typeof (TmProj r name) = do recordTy <- typeof r
                             case recordTy of
                               TyRecord fs -> accessField name fs
                               otherwise -> throwError projError
-typeof (TmTag label term ty) = do
-  termTy <- typeof term
-  case ty of
-    TyVariant fieldsTy ->
-      case lookup label fieldsTy of
-        Nothing -> throwError $ Default "label not found"
-        Just expectedTy ->
-          if termTy == expectedTy then
-            pure ty
-          else
-            throwError $ TypeMismatch "field doesn't have expected type"
-    _ -> throwError $ Default "annotation is not a variant type"
+typeof (TmTag _ _ ty) = return ty
 typeof (TmCase t ((label,_):cs)) = do (TyVariant fs) <- typeof t
                                       accessField label fs
 typeof (TmFix t) = do ty <- typeof t
